@@ -24,7 +24,7 @@
         public string ReturnUrl { get; set; }
         public class InputModel
         {
-            [MaxLength(Constants.User.maxFullNameLength)]
+            [MaxLength(Constants.User.MaxFullNameLength)]
             [Display(Name = "Full Name")]
             public string FullName { get; set; }
             [Required]

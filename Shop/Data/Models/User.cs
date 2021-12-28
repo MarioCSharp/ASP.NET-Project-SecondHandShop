@@ -5,7 +5,7 @@
     using static Constants.User;
     public class User : IdentityUser
     {
-        [MaxLength(maxFullNameLength)]
+        [MaxLength(MaxFullNameLength)]
         public string FullName { get; set; }
     }
 }

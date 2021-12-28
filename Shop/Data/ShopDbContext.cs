@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Shop.Data.Models;
     using Shop.Models;
     public class ShopDbContext : IdentityDbContext<User>
     {
@@ -9,5 +10,9 @@
             : base(options)
         {
         }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Seller> Sellers { get; set; }
     }
 }
