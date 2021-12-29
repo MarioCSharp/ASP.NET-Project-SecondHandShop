@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Shop.Services.Seller
+@using Shop.Services.User
+@inject ISellerService sellerService
+@inject IUserService userService
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,10 +23,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Add">Add product</a>
                         </li>
                     </ul>
-                    <a asp-controller = "Seller" asp-action = "Become" class = "nav-link text-dark">Become seller</a>
+                    @{
+                        var userId = userService.GetUserId();
+                        var isSeller = sellerService.IsSeller(userId);
+                        var isAdmin = User.IsInRole(Constants.Administrator.AdministratorRoleName);
+
+                        if (!isSeller && !isAdmin)
+                        {
+                            <a asp-controller="Seller" asp-action="Become" class="nav-link text-dark">Become seller</a>
+                        }
+                        if (isSeller && !isAdmin)
+                        {
+                            <a asp-action="Product" asp-action="MyProducts" class="nav-link text-dark">My products</a>
+                        }
+                    }
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -35,7 +52,7 @@
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.UtcNow.Year - Shop 
+            &copy; @DateTime.UtcNow.Year - Shop
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

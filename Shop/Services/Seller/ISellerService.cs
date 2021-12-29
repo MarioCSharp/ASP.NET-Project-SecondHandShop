@@ -1,8 +1,9 @@
 ﻿namespace Shop.Services.Seller
 {
-    using Data.Models;
+    using Shop.Models.Seller;
     public interface ISellerService
     {
-        bool Create(Seller seller);
+        bool Create(BecomeSellerFormModel becomeInput, string userId);
+        bool IsSeller(string userId);
     }
 }

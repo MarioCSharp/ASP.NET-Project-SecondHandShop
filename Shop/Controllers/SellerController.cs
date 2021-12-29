@@ -17,9 +17,14 @@
             this.userService = userService;
             this.sellerService = sellerService;
         }
+        public IActionResult Error() => View();
         [Authorize]
         public IActionResult Become()
         {
+            if (sellerService.IsSeller(userService.GetUserId()))
+            {
+                return View(nameof(Error));
+            }
             return View();
         }
         [Authorize]
@@ -30,13 +35,8 @@
             {
                 return View(becomeInput);
             }
-            Seller seller = new Seller
-            {
-                City = becomeInput.City,
-                PhoneNumber = becomeInput.PhoneNumber,
-                UserId = userService.GetUserId()
-            };
-            sellerService.Create(seller);
+            var userId = userService.GetUserId();
+            sellerService.Create(becomeInput, userId);
             return RedirectToAction("Index", "Home");
         }
     }

@@ -10,6 +10,8 @@ namespace Shop
     using Shop.Data;
     using Shop.Infrastructure;
     using Shop.Models;
+    using Shop.Services.Category;
+    using Shop.Services.Seller;
     using Shop.Services.User;
 
     public class Startup
@@ -36,6 +38,8 @@ namespace Shop
                 .AddEntityFrameworkStores<ShopDbContext>();
             services.AddControllersWithViews();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ISellerService, SellerService>();
+            services.AddTransient<ICategoryService, CategoryService>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
