@@ -11,6 +11,7 @@ namespace Shop
     using Shop.Infrastructure;
     using Shop.Models;
     using Shop.Services.Category;
+    using Shop.Services.Product;
     using Shop.Services.Seller;
     using Shop.Services.User;
 
@@ -40,6 +41,7 @@ namespace Shop
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISellerService, SellerService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IProductService, ProductService>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
