@@ -70,23 +70,28 @@
                     .Products
                     .Where(x => (x.Name.ToLower()).Contains(query.Search));
             }
-            var products = productsQuery
-                    .OrderByDescending(x => x.Id)
-                    .Select(x => new ProductListingViewModel
-                    {
-                        Name = x.Name,
-                        Description = x.Description,
-                        Price = x.Price,
-                        ImageURL = x.ImageURL,
-                        Category = context.Categories.FirstOrDefault(y => y.Id == x.CategoryId),
-                        CreaterEmail = x.CreaterEmail,
-                        CreatedOn = x.CreatedOn
-                    })
-                    .ToList();
+            var products = productService.GetProducts(productsQuery.ToList());
             return View(new AllProductsQueryModel
             {
                 Search = query.Search,
                 Products = products
+            });
+        }
+        public IActionResult MyProducts([FromQuery] AllProductsQueryModel query)
+        {
+            var productsQuery = context.Products.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(query.Search))
+            {
+                productsQuery = context
+                    .Products
+                    .Where(x => (x.Name.ToLower()).Contains(query.Search));
+            }
+            var myProducts = productService.GetProducts(productsQuery.ToList())
+                .Where(x => x.UserId == userService.GetUserId());
+            return View(new AllProductsQueryModel
+            {
+                Search = query.Search,
+                Products = myProducts
             });
         }
     }

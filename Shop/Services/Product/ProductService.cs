@@ -4,6 +4,7 @@
     using Shop.Data.Models;
     using Shop.Models.Product;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     public class ProductService : IProductService
     {
@@ -34,5 +35,20 @@
             context.SaveChanges();
             return true;
         }
+        public List<ProductListingViewModel> GetProducts(List<Product> productsQuery)
+        => productsQuery
+            .OrderByDescending(x => x.Id)
+                    .Select(x => new ProductListingViewModel
+                    {
+                        Name = x.Name,
+                        Description = x.Description,
+                        Price = x.Price,
+                        ImageURL = x.ImageURL,
+                        Category = context.Categories.FirstOrDefault(y => y.Id == x.CategoryId),
+                        CreaterEmail = x.CreaterEmail,
+                        CreatedOn = x.CreatedOn,
+                        UserId = x.UserId
+                    })
+                    .ToList();
     }
 }

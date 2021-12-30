@@ -12,5 +12,6 @@
         public Category Category { get; init; }
         public string CreaterEmail { get; init; }
         public DateTime CreatedOn { get; init; }
+        public string UserId { get; set; }
     }
 }
