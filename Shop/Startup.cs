@@ -3,6 +3,7 @@ namespace Shop
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +15,6 @@ namespace Shop
     using Shop.Services.Product;
     using Shop.Services.Seller;
     using Shop.Services.User;
-
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -37,7 +37,10 @@ namespace Shop
             })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ShopDbContext>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISellerService, SellerService>();
             services.AddTransient<ICategoryService, CategoryService>();

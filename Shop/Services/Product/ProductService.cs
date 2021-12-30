@@ -12,9 +12,6 @@
         {
             this.context = context;
         }
-
-        public DateTime Datetime { get; private set; }
-
         public bool Add(ProductFormModel productInput, string userId)
         {
             if (userId == null || productInput.Name == null || productInput.Description == null || productInput.Price <= 0

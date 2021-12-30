@@ -25,12 +25,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Add">Add product</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="All">All products</a>
+                        </li>
                     </ul>
                     @{
                         var userId = userService.GetUserId();
                         var isSeller = sellerService.IsSeller(userId);
                         var isAdmin = User.IsInRole(Constants.Administrator.AdministratorRoleName);
-
                         if (!isSeller && !isAdmin)
                         {
                             <a asp-controller="Seller" asp-action="Become" class="nav-link text-dark">Become seller</a>
