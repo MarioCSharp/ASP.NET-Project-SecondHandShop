@@ -7,5 +7,8 @@
     {
         bool Add(ProductFormModel productInput, string userId);
         List<ProductListingViewModel> GetProducts(List<Product> productsQuery);
+        Product GetProduct(int Id);
+        bool Delete(Product product);
+        bool Edit(ProductFormModel toEdit, int Id);
     }
 }

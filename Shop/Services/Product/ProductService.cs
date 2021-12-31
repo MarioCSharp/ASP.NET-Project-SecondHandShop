@@ -40,6 +40,7 @@
             .OrderByDescending(x => x.Id)
                     .Select(x => new ProductListingViewModel
                     {
+                        Id = x.Id,
                         Name = x.Name,
                         Description = x.Description,
                         Price = x.Price,
@@ -50,5 +51,34 @@
                         UserId = x.UserId
                     })
                     .ToList();
+        public Product GetProduct(int Id)
+        => context.Products.Find(Id);
+        public bool Delete(Product productInput)
+        {
+            if (productInput.UserId == null || productInput.Name == null || productInput.Description == null || productInput.Price <= 0
+                || productInput.ImageURL == null)
+            {
+                return false;
+            }
+            context.Products.Remove(productInput);
+            context.SaveChanges();
+            return true;
+        }
+        public bool Edit(ProductFormModel productInput, int Id)
+        {
+            if (productInput.Name == null || productInput.Description == null || productInput.Price <= 0
+                || productInput.ImageURL == null)
+            {
+                return false;
+            }
+            var product = GetProduct(Id);
+            product.Name = productInput.Name;
+            product.Description = productInput.Description;
+            product.Price = productInput.Price;
+            product.CategoryId = productInput.CategoryId;
+            product.ImageURL = productInput.ImageURL;
+            context.SaveChanges();
+            return true;
+        }
     }
 }

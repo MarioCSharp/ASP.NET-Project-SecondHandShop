@@ -77,14 +77,19 @@
                 Products = products
             });
         }
+        [Authorize]
         public IActionResult MyProducts([FromQuery] AllProductsQueryModel query)
         {
+            if (!sellerService.IsSeller(userService.GetUserId()))
+            {
+                return RedirectToAction("Become", "Seller");
+            }
             var productsQuery = context.Products.AsQueryable();
             if (!string.IsNullOrWhiteSpace(query.Search))
             {
                 productsQuery = context
                     .Products
-                    .Where(x => (x.Name.ToLower()).Contains(query.Search));
+                    .Where(x => (x.Name.ToLower()).Contains(query.Search.ToLower()));
             }
             var myProducts = productService.GetProducts(productsQuery.ToList())
                 .Where(x => x.UserId == userService.GetUserId());
@@ -93,6 +98,62 @@
                 Search = query.Search,
                 Products = myProducts
             });
+        }
+        [Authorize]
+        public IActionResult Delete(int Id)
+        {
+            var product = productService.GetProduct(Id);
+            if (product == null)
+            {
+                return BadRequest();
+            }
+            if (userService.GetUserId() != product.UserId)
+            {
+                return BadRequest();
+            }
+            var deleted = productService.Delete(product);
+            if (!deleted)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction(nameof(MyProducts));
+        }
+        [Authorize]
+        public IActionResult Edit(int Id)
+        {
+            var product = productService.GetProduct(Id);
+            if (product == null)
+            {
+                return BadRequest();
+            }
+            if (userService.GetUserId() != product.UserId)
+            {
+                return BadRequest();
+            }
+            return View(new ProductFormModel
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                CategoryId = product.CategoryId,
+                ImageURL = product.ImageURL,
+                Categories = categoryService.GetCategories()
+            });
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult Edit(ProductFormModel toEdit, int Id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(toEdit);
+            }
+            var edited = productService.Edit(toEdit, Id);
+            if (!edited)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction(nameof(MyProducts));
         }
     }
 }
