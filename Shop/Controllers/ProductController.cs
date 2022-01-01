@@ -155,5 +155,19 @@
             }
             return RedirectToAction(nameof(MyProducts));
         }
+        [Authorize]
+        public IActionResult Details(int Id)
+        {
+            var product = productService.GetProduct(Id);
+            return View(new ProductDetailsViewModel
+            {
+                Id = product.Id,
+                Name= product.Name,
+                ImageURL= product.ImageURL,
+                Description = product.Description,
+                Price= product.Price,
+                CategoryName = categoryService.GetCategory(product.CategoryId).Name
+            });
+        }
     }
 }

@@ -1,0 +1,18 @@
+﻿@using Shop.Models.Cart
+@model CartViewModel
+
+<div class="row">
+    @foreach (var product in Model.Products)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@product.ImageURL" alt="Image url">
+            <div class="card-body">
+                <h5 class="card-title">@product.Name</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Price: @product.Price$</li>
+                <li class="list-group-item">Creater email: @product.CreaterEmail</li>
+            </ul>
+        </div>
+    }
+</div>

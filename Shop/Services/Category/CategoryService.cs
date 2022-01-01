@@ -1,6 +1,7 @@
 ﻿namespace Shop.Services.Category
 {
     using Shop.Data;
+    using Shop.Data.Models;
     using Shop.Models.Category;
     using System.Collections.Generic;
     using System.Linq;
@@ -20,5 +21,7 @@
                 Name = c.Name
             })
             .ToList();
+        public Category GetCategory(int Id)
+        => context.Categories.Find(Id);
     }
 }

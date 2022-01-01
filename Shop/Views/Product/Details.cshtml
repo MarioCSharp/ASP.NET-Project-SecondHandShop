@@ -1,0 +1,11 @@
+﻿@model ProductDetailsViewModel
+
+<div class="col-md-6 offset-3">
+    <img src = "@Model.ImageURL" />
+    <h3>@Model.Name</h3>
+    <p>@Model.Description</p>
+    <hr />
+    <h5>Category: @Model.CategoryName</h5>
+    <h5>Price: @Model.Price</h5>
+    <a asp-controller = "Cart" asp-action = "Add" asp-route-id = "@Model.Id" class="btn btn-primary">Add to cart</a>
+</div>
