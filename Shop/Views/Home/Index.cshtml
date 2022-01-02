@@ -3,6 +3,25 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to the best second hand shop world wide.</h1>
+    <br />
+    <h2 class="text-center">Statistics</h2>
+    <hr />
 </div>
+<div class="jumbotron" id="statistics">
+    <div class="row">
+        <h2 class="col-md-4 text-center" id="total-products"></h2>
+        <h2 class="col-md-4 text-center" id="total-sellers"></h2>
+        <h2 class="col-md-4 text-center" id="total-users"></h2>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $.get('/api/statistics', (data) => {
+            $('#total-products').text(data.totalProducts + " Products");
+            $('#total-sellers').text(data.totalSellers + " Sellers");
+            $('#total-users').text(data.totalUsers + " Users");
+        });
+    </script>
+}
