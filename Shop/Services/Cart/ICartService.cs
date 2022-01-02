@@ -7,5 +7,6 @@
     {
         bool Add(Product product, string userId);
         List<ProductListingViewModel> GetUserCart(string userId);
+        bool Delete(int Id, string userId);
     }
 }

@@ -14,8 +14,11 @@
         }
         public bool Add(Product product, string userId)
         {
-            if (userId == null || product.Name == null || product.Description == null || product.Price <= 0
-                || product.ImageURL == null)
+            if (product == null)
+            {
+                return false;
+            }
+            if (context.Carts.Any(x => x.ProductId == product.Id))
             {
                 return false;
             }
@@ -24,6 +27,7 @@
                 UserId = userId,
                 ProductId = product.Id,
             };
+            product.IsInSomeoneCart = true;
             context.Carts.Add(cart);
             context.SaveChanges();
             return true;
@@ -48,6 +52,23 @@
                     CreaterEmail = x.CreaterEmail
                 })
                 .ToList();
+        }
+        public bool Delete(int Id, string userId)
+        {
+            var product = context.Products.Find(Id);
+            if (product == null)
+            {
+                return false;
+            }
+            var cart = context.Carts.FirstOrDefault(x => x.ProductId == product.Id);
+            if (cart.UserId != userId)
+            {
+                return false;
+            }
+            context.Carts.Remove(cart);
+            product.IsInSomeoneCart = false;
+            context.SaveChanges();
+            return true;
         }
     }
 }

@@ -38,6 +38,7 @@
         public List<ProductListingViewModel> GetProducts(List<Product> productsQuery)
         => productsQuery
             .OrderByDescending(x => x.Id)
+            .Where(x => x.IsInSomeoneCart == false)
                     .Select(x => new ProductListingViewModel
                     {
                         Id = x.Id,

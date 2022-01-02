@@ -31,5 +31,7 @@
         public string CreaterEmail { get; set; }
         [Required]
         public DateTime CreatedOn { get; set; }
+        [Required]
+        public bool IsInSomeoneCart { get; set; }
     }
 }

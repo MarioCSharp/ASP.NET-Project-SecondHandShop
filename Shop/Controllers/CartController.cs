@@ -40,5 +40,15 @@
                 Products = cartService.GetUserCart(userService.GetUserId())
             });
         }
+        [Authorize]
+        public IActionResult Remove(int Id)
+        {
+            var deleted = cartService.Delete(Id, userService.GetUserId());
+            if (!deleted)
+            {
+                return NotFound();
+            }
+            return RedirectToAction("All", "Product");
+        }
     }
 }

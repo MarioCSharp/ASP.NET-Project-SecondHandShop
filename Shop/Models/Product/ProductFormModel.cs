@@ -15,8 +15,10 @@
         [Required]
         public decimal Price { get; set; }
         [Required]
+        [Display(Name = "Image Url")]
         public string ImageURL { get; set; }
         [Required]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public IEnumerable<CategoryListingViewModel> Categories { get; set; }
     }
