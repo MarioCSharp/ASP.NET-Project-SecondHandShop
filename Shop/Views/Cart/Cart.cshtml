@@ -14,9 +14,11 @@
                 <li class="list-group-item">Creater email: @product.CreaterEmail</li>
             </ul>
             <div class="card-body">
-                <a asp-controller="Product" asp-action="Details" asp-route-id = "@product.Id" class="card-link">Learn more</a>
-                <a asp-controller="Cart" asp-action = "Remove" asp-route-id = "@product.Id" class = "card-alert-link text-danger">Remove</a>
+                <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="card-link">Learn more</a>
+                <a asp-controller="Cart" asp-action="Remove" asp-route-id="@product.Id" class="card-alert-link text-danger">Remove</a>
             </div>
         </div>
     }
 </div>
+<hr />
+<a asp-controller="Order" asp-action="Checkout" class="btn btn-primary">Checkout</a>

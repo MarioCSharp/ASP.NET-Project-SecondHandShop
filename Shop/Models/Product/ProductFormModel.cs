@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using static Constants.Product;
+    using static Constants.Models;
     public class ProductFormModel
     {
         [Required]
@@ -16,6 +17,7 @@
         public decimal Price { get; set; }
         [Required]
         [Display(Name = "Image Url")]
+        [MinLength(ImageUrlMinLength)]
         public string ImageURL { get; set; }
         [Required]
         [Display(Name = "Category")]

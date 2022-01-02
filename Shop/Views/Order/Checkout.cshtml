@@ -1,0 +1,15 @@
+﻿@using Shop.Models.Order
+@model OrdersListingViewModel
+
+<h3 class="text-center">Your products:</h3>
+<div class="col">
+    @foreach (var product in Model.Products)
+    {
+        <p><a asp-controller = "Product" asp-action = "Details" asp-route-id = "@product.Id">@product.Name</a> @product.Price</p>
+    }
+</div>
+<hr />
+<div class = "col">
+    <p>Products: @Model.Count</p>
+    <p>Price: @Model.Price</p>
+</div>

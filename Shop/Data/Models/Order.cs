@@ -9,11 +9,11 @@
     {
         [Key]
         public int Id { get; set; }
-        public IEnumerable<Product> Products { get; set; }
         [Required]
         public DateTime IssuedOn { get; set; }
         [ForeignKey("User")]
         public string RecipientId { get; set; }
         public User User { get; set; }
+        public IEnumerable<Product> Products { get; set; }
     }
 }

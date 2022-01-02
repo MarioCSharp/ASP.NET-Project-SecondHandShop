@@ -51,6 +51,7 @@
             }
             if (!ModelState.IsValid)
             {
+                productInput.Categories = categoryService.GetCategories();
                 return View(productInput);
             }
             string userId = userService.GetUserId();

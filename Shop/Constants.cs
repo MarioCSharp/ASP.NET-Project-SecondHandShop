@@ -23,5 +23,9 @@
         {
             public const int SellerCityMaxLength = 15;
         }
+        public class Models
+        {
+            public const int ImageUrlMinLength = 18;
+        }
     }
 }
