@@ -9,7 +9,10 @@
     }
 </div>
 <hr />
-<div class = "col">
+<div class = "row">
     <p>Products: @Model.Count</p>
     <p>Price: @Model.Price</p>
+</div>
+<div class = "col">
+    <a asp-controller = "Order" asp-action = "Buy" class = "btn btn-primary">Buy</a>
 </div>

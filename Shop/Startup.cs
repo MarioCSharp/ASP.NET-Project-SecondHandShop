@@ -13,6 +13,7 @@ namespace Shop
     using Shop.Models;
     using Shop.Services.Cart;
     using Shop.Services.Category;
+    using Shop.Services.Order;
     using Shop.Services.Product;
     using Shop.Services.Seller;
     using Shop.Services.Statistics;
@@ -49,6 +50,7 @@ namespace Shop
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IStatisticsService, StatisticsService>();
+            services.AddTransient<IOrderService, OrderService>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

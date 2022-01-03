@@ -18,7 +18,7 @@
             {
                 TotalProducts = totalProducts,
                 TotalUsers = totalUsers,
-                TotalOrders = totalOrders,
+                TotalPurchases = totalOrders,
                 TotalSellers = totalSellers
             };
         }

@@ -10,9 +10,10 @@
 </div>
 <div class="jumbotron" id="statistics">
     <div class="row">
-        <h2 class="col-md-4 text-center" id="total-products"></h2>
-        <h2 class="col-md-4 text-center" id="total-sellers"></h2>
-        <h2 class="col-md-4 text-center" id="total-users"></h2>
+        <h3 class="col-md-4 text-center" id="total-products"></h3>
+        <h3 class="col-md-4 text-center" id="total-sellers"></h3>
+        <h3 class="col-md-4 text-center" id="total-users"></h3>
+        <h3 class="col-md-4 text-center" id="total-purchases"></h3>
     </div>
 </div>
 
@@ -22,6 +23,7 @@
             $('#total-products').text(data.totalProducts + " Products");
             $('#total-sellers').text(data.totalSellers + " Sellers");
             $('#total-users').text(data.totalUsers + " Users");
+            $('#total-purchases').text(data.totalPurchases + " Purchases");
         });
     </script>
 }

@@ -14,6 +14,9 @@
         [ForeignKey("User")]
         public string RecipientId { get; set; }
         public User User { get; set; }
-        public IEnumerable<Product> Products { get; set; }
+        [Required]
+        public string Products { get; set; }
+        [Required]
+        public int ProductsCount { get; set; }
     }
 }
